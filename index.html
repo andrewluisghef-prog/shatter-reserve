@@ -3,227 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shatter Reserve | Fine Mushroom Crisps</title>
+    <title>Shatter Reserve | Checkout & Shipping</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #0a0a0a; --white: #ffffff; --gray: rgba(26, 26, 26, 0.9); }
-        
-        body { 
-            margin: 0; 
-            font-family: 'Poppins', sans-serif; 
-            color: var(--white); 
-            line-height: 1.6;
-            /* BACKGROUND SETTINGS */
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-color: var(--black); /* Fallback color */
-        }
-
+        :root { --gold: #D4AF37; --black: #0a0a0a; --white: #ffffff; --gray: rgba(30, 30, 30, 0.95); }
+        body { margin: 0; font-family: 'Poppins', sans-serif; color: var(--white); background: var(--black) url('Background') fixed center/cover; }
         .hidden { display: none !important; }
+        .overlay { background: rgba(0,0,0,0.7); min-height: 100vh; padding-bottom: 50px; }
         
-        header { padding: 20px; text-align: center; border-bottom: 1px solid var(--gold); background: rgba(0,0,0,0.85); position: sticky; top: 0; z-index: 1000; }
+        header { padding: 20px; text-align: center; border-bottom: 1px solid var(--gold); background: rgba(0,0,0,0.9); position: sticky; top: 0; z-index: 1000; }
         .logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; cursor: pointer; }
         
-        .hero { text-align: center; padding: 100px 20px; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; background: var(--gray); border-radius: 15px; border: 1px solid rgba(212,175,55,0.3); }
+        h2 { color: var(--gold); text-align: center; font-family: 'Playfair Display'; margin-bottom: 25px; }
         
-        .section { padding: 40px 20px; max-width: 800px; margin: auto; background: rgba(0,0,0,0.6); border-radius: 15px; margin-top: 20px; margin-bottom: 40px; }
-        .card { background: var(--gray); padding: 25px; border: 1px solid var(--gold); border-radius: 8px; margin-bottom: 20px; text-align: center; transition: 0.3s; cursor: pointer; }
-        .card:hover { transform: translateY(-5px); background: rgba(212, 175, 55, 0.1); }
-        
-        .price { color: var(--gold); font-weight: bold; font-size: 1.4rem; display: block; margin-top: 10px; }
-        .cta-btn { background-color: var(--gold); color: var(--black); padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; cursor: pointer; border: none; font-size: 1rem; }
-        
-        /* Step 2 Selection Styles */
-        .flavor-row { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
-        .qty-controls button { width: 40px; height: 40px; background: var(--gold); border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
-        .qty-controls span { margin: 0 20px; font-size: 1.4rem; font-weight: 600; }
-        .summary-box { background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid var(--gold); text-align: center; }
+        .card { background: rgba(0,0,0,0.5); padding: 20px; border: 1px solid #444; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .price { color: var(--gold); font-weight: 600; font-size: 1.2rem; }
 
-        footer { text-align: center; padding: 40px; background: rgba(0,0,0,0.8); margin-top: 50px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #444; background: #222; color: white; box-sizing: border-box; }
+        label { font-size: 0.9rem; color: var(--gold); font-weight: 600; }
+
+        .flavor-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #333; }
+        .qty-btn { width: 35px; height: 35px; background: var(--gold); border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        
+        .summary-line { display: flex; justify-content: space-between; margin: 10px 0; font-size: 1rem; }
+        .total-line { border-top: 2px solid var(--gold); padding-top: 15px; font-size: 1.4rem; font-weight: bold; }
+        
+        .cta-btn { background: var(--gold); color: black; padding: 15px; width: 100%; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 20px; }
+        .note { font-size: 0.8rem; font-style: italic; color: #aaa; margin-top: 10px; text-align: center; }
+        .highlight { color: var(--gold); font-weight: 600; }
     </style>
 </head>
 <body>
+<div class="overlay">
+    <header><div class="logo" onclick="location.reload()">Shatter Reserve</div></header>
 
-<header>
-    <div class="logo" onclick="location.reload()">Shatter Reserve</div>
-</header>
-
-<!-- MAIN VIEW -->
-<div id="home-view">
-    <section class="hero">
-        <h1>SHATTER RESERVE</h1>
-        <p style="font-size: 1.2rem; letter-spacing: 2px;">FINE MUSHROOM CRISPS</p>
-        <button class="cta-btn" onclick="showView('order')">ORDER NOW</button>
-    </section>
-
-    <section class="section" style="text-align: center;">
-        <h2 style="color:var(--gold); font-family: 'Playfair Display';">Join Our Exclusive Reseller Program</h2>
-        <p>Start with as low as ₱900 and earn a minimum of ₱530 profit!</p>
-        <a href="https://m.me/61589629505231" target="_blank" rel="noopener noreferrer" class="cta-btn">MESSAGE TO JOIN</a>
-    </section>
-</div>
-
-<!-- ORDER VIEW -->
-<div id="order-view" class="hidden section">
-    <div id="step-1">
-        <h2 style="color:var(--gold); text-align: center; font-family: 'Playfair Display';">Step 1: Choose Your Pack</h2>
-        <div class="card" onclick="selectPack('Solo Pack', 1, 130)">
-            <h3>Solo Pack</h3>
-            <p>1 perfectly seasoned 50g bag</p>
-            <span class="price">₱130</span>
-        </div>
-        <div class="card" onclick="selectPack('Barkada Pack', 6, 650)">
-            <h3>Barkada Pack</h3>
-            <p>Buy 5, Get 1 FREE (6 bags total)</p>
-            <span class="price">₱650</span>
-        </div>
-        <div class="card" onclick="selectPack('Family Pack', 12, 1300)">
-            <h3>Family Pack</h3>
-            <p>Buy 10, Get 2 FREE (12 bags total)</p>
-            <span class="price">₱1,300</span>
-        </div>
-        <div class="card" onclick="selectPack('Custom Order', 0, 130)">
-            <h3>Custom Order</h3>
-            <p>Order any quantity you want</p>
-            <span class="price">₱130 per bag</span>
-        </div>
-        <div style="text-align: center;"><button class="cta-btn" style="background:#555; color:white;" onclick="location.reload()">Cancel</button></div>
+    <!-- STEP 1: PACK SELECTION -->
+    <div id="step-1" class="container">
+        <h2>Choose Your Pack</h2>
+        <div class="card" onclick="selectPack('Solo Pack', 1, 130)"><h3>Solo Pack</h3><p>1 Bag</p><span class="price">₱130</span></div>
+        <div class="card" onclick="selectPack('Barkada Pack', 6, 650)"><h3>Barkada Pack</h3><p>5+1 FREE (6 bags)</p><span class="price">₱650</span></div>
+        <div class="card" onclick="selectPack('Family Pack', 12, 1300)"><h3>Family Pack</h3><p>10+2 FREE (12 bags)</p><span class="price">₱1,300</span></div>
+        <div class="card" onclick="selectPack('Custom Order', 0, 130)"><h3>Custom Order</h3><p>Any quantity</p><span class="price">₱130/bag</span></div>
     </div>
 
-    <div id="step-2" class="hidden">
-        <h2 style="color:var(--gold); text-align: center; font-family: 'Playfair Display';">Step 2: Choose Your Flavors</h2>
-        <p id="pack-summary" style="text-align:center; background: var(--gold); color: black; padding: 5px; font-weight: bold; border-radius: 5px;"></p>
-        
-        <div class="flavor-row">
-            <span>Original</span>
-            <div class="qty-controls">
-                <button onclick="changeQty('original', -1)">-</button>
-                <span id="qty-original">0</span>
-                <button onclick="changeQty('original', 1)">+</button>
-            </div>
-        </div>
-        <div class="flavor-row">
-            <span>Barbeque</span>
-            <div class="qty-controls">
-                <button onclick="changeQty('bbq', -1)">-</button>
-                <span id="qty-bbq">0</span>
-                <button onclick="changeQty('bbq', 1)">+</button>
-            </div>
-        </div>
-        <div class="flavor-row">
-            <span>Cheddar Sour Cream</span>
-            <div class="qty-controls">
-                <button onclick="changeQty('sourcream', -1)">-</button>
-                <span id="qty-sourcream">0</span>
-                <button onclick="changeQty('sourcream', 1)">+</button>
-            </div>
-        </div>
-        <div class="flavor-row">
-            <span>Cheese</span>
-            <div class="qty-controls">
-                <button onclick="changeQty('cheese', -1)">-</button>
-                <span id="qty-cheese">0</span>
-                <button onclick="changeQty('cheese', 1)">+</button>
-            </div>
-        </div>
-
+    <!-- STEP 2: FLAVOR SELECTION -->
+    <div id="step-2" class="container hidden">
+        <h2>Choose Your Flavors</h2>
+        <p id="pack-summary" style="text-align:center; font-weight:600;"></p>
+        <div id="flavor-container"></div>
         <div class="summary-box">
-            <p style="font-size: 1.1rem;">Selection: <span id="total-selected" style="color:var(--gold); font-weight:bold;">0</span> / <span id="target-total"></span> bags</p>
-            <p style="font-size: 1.3rem;">Total Price: <span class="price" id="total-price" style="display:inline;">₱0</span></p>
+            <p>Selection: <span id="total-selected">0</span> / <span id="target-total"></span></p>
+        </div>
+        <button class="cta-btn" onclick="validateFlavors()">CONTINUE TO SHIPPING</button>
+    </div>
+
+    <!-- STEP 3: CUSTOMER DETAILS & SHIPPING -->
+    <div id="step-3" class="container hidden">
+        <h2>Delivery Details</h2>
+        <label>Full Name</label><input type="text" id="cust-name" placeholder="Juan Dela Cruz">
+        <label>Complete Address</label><textarea id="cust-address" rows="3" placeholder="House No, Street, Brgy, City"></textarea>
+        <label>Google Maps/Pin Location (Link or Description)</label><input type="text" id="cust-pin" placeholder="Paste link or describe landmarks">
+        <label>Phone Number</label><input type="text" id="cust-phone" placeholder="0917XXXXXXX">
+        
+        <label>Region</label>
+        <select id="region" onchange="calculateShipping()">
+            <option value="ncr">Metro Manila (NCR)</option>
+            <option value="luzon">Luzon (Provincial)</option>
+            <option value="visayas">Visayas</option>
+            <option value="mindanao">Mindanao</option>
+        </select>
+
+        <label>Shipping Method</label>
+        <select id="ship-method" onchange="calculateShipping()">
+            <!-- Options populated by JS based on region -->
+        </select>
+
+        <div id="shipping-note" class="note"></div>
+        
+        <div class="summary-box" style="margin-top:20px;">
+            <div class="summary-line"><span>Subtotal:</span><span id="sum-subtotal">₱0</span></div>
+            <div class="summary-line"><span>Shipping Fee:</span><span id="sum-ship">₱0</span></div>
+            <div class="summary-line" id="discount-row"><span>Promo Discount:</span><span id="sum-discount">-₱0</span></div>
+            <div class="summary-line total-line"><span>GRAND TOTAL:</span><span id="sum-total">₱0</span></div>
         </div>
 
-        <div style="margin-top:30px; display: flex; justify-content: space-between;">
-            <button class="cta-btn" style="background:#555; color:white;" onclick="backToStep1()">Back</button>
-            <button class="cta-btn" onclick="submitToMessenger()">ORDER VIA MESSENGER</button>
-        </div>
+        <p class="note">⚠️ Note: Customer pays the rider/courier directly for shipping unless stated as Free.</p>
+        <button class="cta-btn" onclick="finalizeOrder()">REVIEW & ORDER VIA MESSENGER</button>
     </div>
 </div>
-
-<footer>
-    <p>&copy; 2026 SHATTER RESERVE | Fine Mushroom Crisps by Andrew</p>
-</footer>
 
 <script>
-    let currentPack = '';
-    let requiredQty = 0;
-    let basePrice = 0;
-    let flavors = { original: 0, bbq: 0, sourcream: 0, cheese: 0 };
-
-    function showView(view) {
-        document.getElementById('home-view').classList.add('hidden');
-        document.getElementById('order-view').classList.remove('hidden');
-    }
+    let order = { pack: '', targetQty: 0, subtotal: 0, flavors: { Original: 0, Barbeque: 0, SourCream: 0, Cheese: 0 } };
 
     function selectPack(name, qty, price) {
-        currentPack = name;
-        requiredQty = qty;
-        basePrice = price;
-        flavors = { original: 0, bbq: 0, sourcream: 0, cheese: 0 }; // Reset
-        updateDisplay();
-        
-        document.getElementById('step-1').classList.add('hidden');
-        document.getElementById('step-2').classList.remove('hidden');
-        document.getElementById('pack-summary').innerText = name + (qty > 0 ? " Selection" : "");
-        document.getElementById('target-total').innerText = qty > 0 ? qty : "∞";
+        order.pack = name; order.targetQty = qty; order.subtotal = price;
+        document.getElementById('target-total').innerText = qty > 0 ? qty : 'Any';
+        renderFlavors();
+        showStep(2);
     }
 
-    function backToStep1() {
-        document.getElementById('step-1').classList.remove('hidden');
-        document.getElementById('step-2').classList.add('hidden');
+    function renderFlavors() {
+        const list = ['Original', 'Barbeque', 'SourCream', 'Cheese'];
+        let html = '';
+        list.forEach(f => {
+            html += `<div class="flavor-row"><span>${f.replace(/([A-Z])/g, ' $1')}</span><div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty('${f}', -1)">-</button>
+                <span id="qty-${f}" style="margin:0 15px;">0</span>
+                <button class="qty-btn" onclick="changeQty('${f}', 1)">+</button>
+            </div></div>`;
+        });
+        document.getElementById('flavor-container').innerHTML = html;
     }
 
-    function changeQty(flavor, change) {
-        let total = Object.values(flavors).reduce((a, b) => a + b, 0);
-        
-        if (requiredQty > 0 && change > 0 && total >= requiredQty) {
-            alert("You have reached the " + requiredQty + " bag limit for this pack!");
-            return;
-        }
-
-        if (flavors[flavor] + change >= 0) {
-            flavors[flavor] += change;
-            updateDisplay();
+    function changeQty(f, delta) {
+        let currentTotal = Object.values(order.flavors).reduce((a, b) => a + b, 0);
+        if (order.targetQty > 0 && delta > 0 && currentTotal >= order.targetQty) return;
+        if (order.flavors[f] + delta >= 0) {
+            order.flavors[f] += delta;
+            document.getElementById(`qty-${f}`).innerText = order.flavors[f];
+            document.getElementById('total-selected').innerText = currentTotal + delta;
         }
     }
 
-    function updateDisplay() {
-        let total = 0;
-        for (let key in flavors) {
-            document.getElementById('qty-' + key).innerText = flavors[key];
-            total += flavors[key];
-        }
-        document.getElementById('total-selected').innerText = total;
-        
-        let finalPrice = (currentPack === 'Custom Order') ? (total * 130) : basePrice;
-        document.getElementById('total-price').innerText = "₱" + finalPrice.toLocaleString();
+    function validateFlavors() {
+        let total = Object.values(order.flavors).reduce((a, b) => a + b, 0);
+        if (order.targetQty > 0 && total !== order.targetQty) return alert(`Select exactly ${order.targetQty} bags.`);
+        if (total === 0) return alert('Add at least 1 bag.');
+        if (order.pack === 'Custom Order') order.subtotal = total * 130;
+        showStep(3);
+        calculateShipping();
     }
 
-    function submitToMessenger() {
-        let total = Object.values(flavors).reduce((a, b) => a + b, 0);
+    function calculateShipping() {
+        const region = document.getElementById('region').value;
+        const methodSelect = document.getElementById('ship-method');
+        const sub = order.subtotal;
+        let shipFee = 0; let discount = 0; let note = '';
+
+        // Reset Method Options based on Region
+        if (region === 'ncr') {
+            if (methodSelect.innerHTML.indexOf('Same-Day') === -1) {
+                methodSelect.innerHTML = `<option value="standard">J&T Standard (1-3 Days)</option><option value="express">Same-Day Express (Lalamove/Grab)</option>`;
+            }
+        } else {
+            methodSelect.innerHTML = `<option value="standard">J&T Provincial Standard</option>`;
+        }
+
+        const method = methodSelect.value;
+        const totalBags = Object.values(order.flavors).reduce((a, b) => a + b, 0);
         
-        if (requiredQty > 0 && total !== requiredQty) {
-            alert("Please select exactly " + requiredQty + " bags for this bundle.");
-            return;
-        }
-        if (total === 0) {
-            alert("Please add at least 1 bag to your order.");
-            return;
+        // Volumetric Logic
+        let weightClass = 1; // Default Pouch (1kg)
+        if (totalBags >= 6 && totalBags < 12) weightClass = 2.5; // Medium Box
+        if (totalBags >= 12) weightClass = 4.5; // Large Box
+
+        if (region === 'ncr') {
+            if (method === 'express') {
+                note = "Express Waived Free Shipping. <span class='highlight'>₱50 Subsidy</span> applied if subtotal ≥ ₱650. Rider fee paid by customer upon arrival.";
+                if (sub >= 650) discount = 50;
+            } else { // Standard NCR
+                shipFee = (weightClass === 1) ? 115 : (weightClass === 2.5 ? 155 : 220);
+                if (sub >= 650) { shipFee = 0; note = "Free Shipping Promo Applied! (1-3 Days)"; }
+            }
+        } else { // Provincial
+            const rates = { luzon: [165, 190, 320], visayas: [180, 200, 370], mindanao: [195, 220, 370] };
+            const idx = weightClass === 1 ? 0 : (weightClass === 2.5 ? 1 : 2);
+            shipFee = rates[region][idx];
+
+            if (sub >= 3900) { shipFee = 0; note = "PROVINCIAL FREE SHIPPING APPLIED!"; }
+            else if (sub >= 1300) { discount = 150; note = "₱150 Provincial Shipping Discount Applied!"; }
+            else if (sub >= 650) { discount = 100; note = "₱100 Provincial Shipping Discount Applied!"; }
         }
 
-        let msg = "Hello Shatter Reserve! I'd like to order:%0A%0A";
-        msg += "*PACKAGE:* " + currentPack + "%0A";
-        if (flavors.original > 0) msg += "- Original: " + flavors.original + "%0A";
-        if (flavors.bbq > 0) msg += "- Barbeque: " + flavors.bbq + "%0A";
-        if (flavors.sourcream > 0) msg += "- Sour Cream: " + flavors.sourcream + "%0A";
-        if (flavors.cheese > 0) msg += "- Cheese: " + flavors.cheese + "%0A";
-        msg += "%0A*TOTAL PRICE:* " + document.getElementById('total-price').innerText;
+        document.getElementById('sum-subtotal').innerText = `₱${sub}`;
+        document.getElementById('sum-ship').innerText = shipFee === 0 ? "FREE" : `₱${shipFee}`;
+        document.getElementById('sum-discount').innerText = `-₱${discount}`;
+        document.getElementById('sum-total').innerText = `₱${sub + shipFee - discount}`;
+        document.getElementById('shipping-note').innerHTML = note;
+    }
 
-        window.open("https://m.me/61589629505231?text=" + msg, "_blank");
+    function finalizeOrder() {
+        const fields = ['cust-name', 'cust-address', 'cust-pin', 'cust-phone'];
+        if (fields.some(f => !document.getElementById(f).value)) return alert('Please fill in all delivery details.');
+
+        let flavorTxt = "";
+        for (let f in order.flavors) if (order.flavors[f] > 0) flavorTxt += `- ${f}: ${order.flavors[f]}\n`;
+
+        let summary = `✨ NEW ORDER: ${order.pack} ✨\n\n`;
+        summary += `👤 CUSTOMER: ${document.getElementById('cust-name').value}\n`;
+        summary += `📞 PHONE: ${document.getElementById('cust-phone').value}\n`;
+        summary += `📍 ADDRESS: ${document.getElementById('cust-address').value}\n`;
+        summary += `📌 PIN: ${document.getElementById('cust-pin').value}\n\n`;
+        summary += `📦 ITEMS:\n${flavorTxt}\n`;
+        summary += `🚚 METHOD: ${document.getElementById('ship-method').options[document.getElementById('ship-method').selectedIndex].text}\n`;
+        summary += `💰 SUB-TOTAL: ₱${order.subtotal}\n`;
+        summary += `🚛 SHIP FEE: ${document.getElementById('sum-ship').innerText}\n`;
+        summary += `🎁 DISCOUNT: ${document.getElementById('sum-discount').innerText}\n`;
+        summary += `✅ GRAND TOTAL: ${document.getElementById('sum-total').innerText}\n\n`;
+        summary += `--- Customer acknowledges remaining rider/shipping fees are paid upon delivery. ---`;
+
+        window.location.href = `https://m.me/61589629505231?text=${encodeURIComponent(summary)}`;
+    }
+
+    function showStep(s) {
+        [1,2,3].forEach(n => document.getElementById(`step-${n}`).classList.add('hidden'));
+        document.getElementById(`step-${s}`).classList.remove('hidden');
+        window.scrollTo(0,0);
     }
 </script>
-
 </body>
 </html>
