@@ -6,206 +6,224 @@
     <title>Shatter Reserve | Fine Mushroom Crisps</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #D4AF37;
-            --black: #0a0a0a;
-            --white: #ffffff;
-            --gray: #1a1a1a;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--black);
-            color: var(--white);
+        :root { --gold: #D4AF37; --black: #0a0a0a; --white: #ffffff; --gray: rgba(26, 26, 26, 0.9); }
+        
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--white); 
             line-height: 1.6;
-        }
-
-        header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--gold);
-            background: rgba(0,0,0,0.9);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(Logo.png); /* Placeholder background */
+            /* BACKGROUND SETTINGS */
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Background');
             background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: var(--black); /* Fallback color */
         }
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
+        .hidden { display: none !important; }
+        
+        header { padding: 20px; text-align: center; border-bottom: 1px solid var(--gold); background: rgba(0,0,0,0.85); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; cursor: pointer; }
+        
+        .hero { text-align: center; padding: 100px 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        
+        .section { padding: 40px 20px; max-width: 800px; margin: auto; background: rgba(0,0,0,0.6); border-radius: 15px; margin-top: 20px; margin-bottom: 40px; }
+        .card { background: var(--gray); padding: 25px; border: 1px solid var(--gold); border-radius: 8px; margin-bottom: 20px; text-align: center; transition: 0.3s; cursor: pointer; }
+        .card:hover { transform: translateY(-5px); background: rgba(212, 175, 55, 0.1); }
+        
+        .price { color: var(--gold); font-weight: bold; font-size: 1.4rem; display: block; margin-top: 10px; }
+        .cta-btn { background-color: var(--gold); color: var(--black); padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; cursor: pointer; border: none; font-size: 1rem; }
+        
+        /* Step 2 Selection Styles */
+        .flavor-row { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
+        .qty-controls button { width: 40px; height: 40px; background: var(--gold); border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
+        .qty-controls span { margin: 0 20px; font-size: 1.4rem; font-weight: 600; }
+        .summary-box { background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid var(--gold); text-align: center; }
 
-        .cta-btn {
-            background-color: var(--gold);
-            color: var(--black);
-            padding: 15px 40px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 2px;
-            display: inline-block;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        .cta-btn:hover {
-            background-color: white;
-            transform: scale(1.05);
-        }
-
-        .section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: var(--gray);
-            padding: 30px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: var(--gold);
-        }
-
-        .price {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        .benefit-tag {
-            color: var(--gold);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid #333;
-            font-size: 0.9rem;
-        }
-
-        .reseller-badge {
-            border: 2px dashed var(--gold);
-            padding: 10px;
-            display: inline-block;
-            margin-top: 10px;
-        }
+        footer { text-align: center; padding: 40px; background: rgba(0,0,0,0.8); margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Shatter Reserve</div>
+    <div class="logo" onclick="location.reload()">Shatter Reserve</div>
 </header>
 
-<section class="hero">
-    <h1>FINE MUSHROOM CRISPS</h1>
-    <p>Discover the natural elegance and wellness in every crunch.</p>
-    <a href="#menu" class="cta-btn">ORDER NOW</a>
-</section>
+<!-- MAIN VIEW -->
+<div id="home-view">
+    <section class="hero">
+        <h1>SHATTER RESERVE</h1>
+        <p style="font-size: 1.2rem; letter-spacing: 2px;">FINE MUSHROOM CRISPS</p>
+        <button class="cta-btn" onclick="showView('order')">ORDER NOW</button>
+    </section>
 
-<section class="section" id="menu">
-    <h2 style="text-align:center; font-family: 'Playfair Display'; color: var(--gold);">Our Signature Flavors</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Original</h3>
-            <p>The pure, earthy essence of Enoki.</p>
-            <p class="price">₱130</p>
-        </div>
-        <div class="card">
-            <h3>Barbeque</h3>
-            <p>Smoky, bold, and perfectly seasoned.</p>
-            <p class="price">₱130</p>
-        </div>
-        <div class="card">
-            <h3>Cheddar Sour Cream</h3>
-            <p>Savory cheese meets tangy cream.</p>
-            <p class="price">₱130</p>
-        </div>
-    </div>
-</section>
+    <section class="section" style="text-align: center;">
+        <h2 style="color:var(--gold); font-family: 'Playfair Display';">Join Our Exclusive Reseller Program</h2>
+        <p>Start with as low as ₱900 and earn a minimum of ₱530 profit!</p>
+        <a href="https://m.me/61589629505231" target="_blank" rel="noopener noreferrer" class="cta-btn">MESSAGE TO JOIN</a>
+    </section>
+</div>
 
-<section class="section" style="background: #111;">
-    <h2 style="text-align:center; font-family: 'Playfair Display'; color: var(--gold);">Wellness Benefits</h2>
-    <div class="grid">
-        <div class="card">
-            <span class="benefit-tag">Muscle Recovery</span>
-            <p>Rich in B-vitamins and Niacin to help convert nutrients into usable fuel.</p>
+<!-- ORDER VIEW -->
+<div id="order-view" class="hidden section">
+    <div id="step-1">
+        <h2 style="color:var(--gold); text-align: center; font-family: 'Playfair Display';">Step 1: Choose Your Pack</h2>
+        <div class="card" onclick="selectPack('Solo Pack', 1, 130)">
+            <h3>Solo Pack</h3>
+            <p>1 perfectly seasoned 50g bag</p>
+            <span class="price">₱130</span>
         </div>
-        <div class="card">
-            <span class="benefit-tag">Immune Support</span>
-            <p>Packed with beta-glucans to strengthen your body's natural response.</p>
+        <div class="card" onclick="selectPack('Barkada Pack', 6, 650)">
+            <h3>Barkada Pack</h3>
+            <p>Buy 5, Get 1 FREE (6 bags total)</p>
+            <span class="price">₱650</span>
         </div>
-        <div class="card">
-            <span class="benefit-tag">Sustained Energy</span>
-            <p>Structural dietary fiber ensures a slow release of energy without the crash.</p>
+        <div class="card" onclick="selectPack('Family Pack', 12, 1300)">
+            <h3>Family Pack</h3>
+            <p>Buy 10, Get 2 FREE (12 bags total)</p>
+            <span class="price">₱1,300</span>
         </div>
+        <div class="card" onclick="selectPack('Custom Order', 0, 130)">
+            <h3>Custom Order</h3>
+            <p>Order any quantity you want</p>
+            <span class="price">₱130 per bag</span>
+        </div>
+        <div style="text-align: center;"><button class="cta-btn" style="background:#555; color:white;" onclick="location.reload()">Cancel</button></div>
     </div>
-</section>
 
-<section class="section">
-    <h2 style="text-align:center; font-family: 'Playfair Display'; color: var(--gold);">Reseller Program</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Tier 1: Starter</h3>
-            <p>10 + 1 FREE Bags</p>
-            <p class="price">₱900</p>
-            <div class="reseller-badge">Profit: ₱530</div>
+    <div id="step-2" class="hidden">
+        <h2 style="color:var(--gold); text-align: center; font-family: 'Playfair Display';">Step 2: Choose Your Flavors</h2>
+        <p id="pack-summary" style="text-align:center; background: var(--gold); color: black; padding: 5px; font-weight: bold; border-radius: 5px;"></p>
+        
+        <div class="flavor-row">
+            <span>Original</span>
+            <div class="qty-controls">
+                <button onclick="changeQty('original', -1)">-</button>
+                <span id="qty-original">0</span>
+                <button onclick="changeQty('original', 1)">+</button>
+            </div>
         </div>
-        <div class="card">
-            <h3>Tier 2: Growth</h3>
-            <p>25 Bags</p>
-            <p class="price">₱2,000</p>
-            <div class="reseller-badge">Profit: ₱1,250</div>
+        <div class="flavor-row">
+            <span>Barbeque</span>
+            <div class="qty-controls">
+                <button onclick="changeQty('bbq', -1)">-</button>
+                <span id="qty-bbq">0</span>
+                <button onclick="changeQty('bbq', 1)">+</button>
+            </div>
         </div>
-        <div class="card" style="border-color: var(--gold);">
-            <h3>Tier 3: Distributor</h3>
-            <p>50 + 2 FREE Bags</p>
-            <p class="price">₱4,500</p>
-            <div class="reseller-badge">Profit: ₱2,260</div>
+        <div class="flavor-row">
+            <span>Cheddar Sour Cream</span>
+            <div class="qty-controls">
+                <button onclick="changeQty('sourcream', -1)">-</button>
+                <span id="qty-sourcream">0</span>
+                <button onclick="changeQty('sourcream', 1)">+</button>
+            </div>
+        </div>
+        <div class="flavor-row">
+            <span>Cheese</span>
+            <div class="qty-controls">
+                <button onclick="changeQty('cheese', -1)">-</button>
+                <span id="qty-cheese">0</span>
+                <button onclick="changeQty('cheese', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <p style="font-size: 1.1rem;">Selection: <span id="total-selected" style="color:var(--gold); font-weight:bold;">0</span> / <span id="target-total"></span> bags</p>
+            <p style="font-size: 1.3rem;">Total Price: <span class="price" id="total-price" style="display:inline;">₱0</span></p>
+        </div>
+
+        <div style="margin-top:30px; display: flex; justify-content: space-between;">
+            <button class="cta-btn" style="background:#555; color:white;" onclick="backToStep1()">Back</button>
+            <button class="cta-btn" onclick="submitToMessenger()">ORDER VIA MESSENGER</button>
         </div>
     </div>
-    <div style="text-align:center; margin-top:30px;">
-        <a href="https://m.me/61589629505231" class="cta-btn">MESSAGE TO JOIN</a>
-    </div>
-</section>
+</div>
 
 <footer>
-    <p>&copy; 2024 Shatter Reserve | Fine Mushroom Crisps by Andrew</p>
-    <p>Follow us on Facebook & Instagram @shatterreserve</p>
+    <p>&copy; 2024 SHATTER RESERVE | Fine Mushroom Crisps by Andrew</p>
 </footer>
+
+<script>
+    let currentPack = '';
+    let requiredQty = 0;
+    let basePrice = 0;
+    let flavors = { original: 0, bbq: 0, sourcream: 0, cheese: 0 };
+
+    function showView(view) {
+        document.getElementById('home-view').classList.add('hidden');
+        document.getElementById('order-view').classList.remove('hidden');
+    }
+
+    function selectPack(name, qty, price) {
+        currentPack = name;
+        requiredQty = qty;
+        basePrice = price;
+        flavors = { original: 0, bbq: 0, sourcream: 0, cheese: 0 }; // Reset
+        updateDisplay();
+        
+        document.getElementById('step-1').classList.add('hidden');
+        document.getElementById('step-2').classList.remove('hidden');
+        document.getElementById('pack-summary').innerText = name + (qty > 0 ? " Selection" : "");
+        document.getElementById('target-total').innerText = qty > 0 ? qty : "∞";
+    }
+
+    function backToStep1() {
+        document.getElementById('step-1').classList.remove('hidden');
+        document.getElementById('step-2').classList.add('hidden');
+    }
+
+    function changeQty(flavor, change) {
+        let total = Object.values(flavors).reduce((a, b) => a + b, 0);
+        
+        if (requiredQty > 0 && change > 0 && total >= requiredQty) {
+            alert("You have reached the " + requiredQty + " bag limit for this pack!");
+            return;
+        }
+
+        if (flavors[flavor] + change >= 0) {
+            flavors[flavor] += change;
+            updateDisplay();
+        }
+    }
+
+    function updateDisplay() {
+        let total = 0;
+        for (let key in flavors) {
+            document.getElementById('qty-' + key).innerText = flavors[key];
+            total += flavors[key];
+        }
+        document.getElementById('total-selected').innerText = total;
+        
+        let finalPrice = (currentPack === 'Custom Order') ? (total * 130) : basePrice;
+        document.getElementById('total-price').innerText = "₱" + finalPrice.toLocaleString();
+    }
+
+    function submitToMessenger() {
+        let total = Object.values(flavors).reduce((a, b) => a + b, 0);
+        
+        if (requiredQty > 0 && total !== requiredQty) {
+            alert("Please select exactly " + requiredQty + " bags for this bundle.");
+            return;
+        }
+        if (total === 0) {
+            alert("Please add at least 1 bag to your order.");
+            return;
+        }
+
+        let msg = "Hello Shatter Reserve! I'd like to order:%0A%0A";
+        msg += "*PACKAGE:* " + currentPack + "%0A";
+        if (flavors.original > 0) msg += "- Original: " + flavors.original + "%0A";
+        if (flavors.bbq > 0) msg += "- Barbeque: " + flavors.bbq + "%0A";
+        if (flavors.sourcream > 0) msg += "- Sour Cream: " + flavors.sourcream + "%0A";
+        if (flavors.cheese > 0) msg += "- Cheese: " + flavors.cheese + "%0A";
+        msg += "%0A*TOTAL PRICE:* " + document.getElementById('total-price').innerText;
+
+        window.open("https://m.me/61589629505231?text=" + msg, "_blank");
+    }
+</script>
 
 </body>
 </html>
