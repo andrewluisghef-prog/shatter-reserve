@@ -3,103 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shatter Reserve | Checkout & Shipping</title>
+    <title>Shatter Reserve | Fine Mushroom Crisps</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #0a0a0a; --white: #ffffff; --gray: rgba(30, 30, 30, 0.95); }
-        body { margin: 0; font-family: 'Poppins', sans-serif; color: var(--white); background: var(--black) url('Background') fixed center/cover; }
-        .hidden { display: none !important; }
-        .overlay { background: rgba(0,0,0,0.7); min-height: 100vh; padding-bottom: 50px; }
+        :root { --gold: #D4AF37; --black: #0a0a0a; --white: #ffffff; --gray: rgba(20, 20, 20, 0.95); }
         
+        body { 
+            margin: 0; font-family: 'Poppins', sans-serif; color: var(--white); 
+            background: var(--black) url('Background') fixed center/cover; 
+        }
+        .overlay { background: rgba(0,0,0,0.75); min-height: 100vh; }
+        .hidden { display: none !important; }
+        
+        /* Navigation */
         header { padding: 20px; text-align: center; border-bottom: 1px solid var(--gold); background: rgba(0,0,0,0.9); position: sticky; top: 0; z-index: 1000; }
         .logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; cursor: pointer; }
         
-        .container { max-width: 600px; margin: 20px auto; padding: 20px; background: var(--gray); border-radius: 15px; border: 1px solid rgba(212,175,55,0.3); }
-        h2 { color: var(--gold); text-align: center; font-family: 'Playfair Display'; margin-bottom: 25px; }
+        /* Home View Styles */
+        .hero { text-align: center; padding: 120px 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); margin: 0; }
+        .hero p { font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 30px; }
+
+        .reseller-section { max-width: 800px; margin: 0 auto 50px; padding: 40px 20px; background: rgba(0,0,0,0.6); border: 1px solid var(--gold); border-radius: 15px; text-align: center; }
+
+        /* Checkout Styles */
+        .container { max-width: 600px; margin: 20px auto; padding: 25px; background: var(--gray); border-radius: 15px; border: 1px solid rgba(212,175,55,0.3); }
+        h2 { color: var(--gold); text-align: center; font-family: 'Playfair Display'; }
         
-        .card { background: rgba(0,0,0,0.5); padding: 20px; border: 1px solid #444; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .card { background: rgba(255,255,255,0.05); padding: 20px; border: 1px solid #444; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); background: rgba(212,175,55,0.1); }
         .price { color: var(--gold); font-weight: 600; font-size: 1.2rem; }
 
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #444; background: #222; color: white; box-sizing: border-box; }
-        label { font-size: 0.9rem; color: var(--gold); font-weight: 600; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #444; background: #111; color: white; box-sizing: border-box; font-family: inherit; }
+        label { font-size: 0.85rem; color: var(--gold); font-weight: 600; text-transform: uppercase; }
 
         .flavor-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #333; }
         .qty-btn { width: 35px; height: 35px; background: var(--gold); border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
         
-        .summary-line { display: flex; justify-content: space-between; margin: 10px 0; font-size: 1rem; }
-        .total-line { border-top: 2px solid var(--gold); padding-top: 15px; font-size: 1.4rem; font-weight: bold; }
+        .summary-box { background: #000; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid var(--gold); }
+        .summary-line { display: flex; justify-content: space-between; margin: 8px 0; }
+        .total-line { border-top: 1px solid #444; padding-top: 15px; font-size: 1.4rem; font-weight: bold; color: var(--gold); }
         
-        .cta-btn { background: var(--gold); color: black; padding: 15px; width: 100%; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 20px; }
+        .cta-btn { background: var(--gold); color: black; padding: 18px; width: 100%; border: none; border-radius: 5px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .cta-btn:hover { background: white; }
+        
         .note { font-size: 0.8rem; font-style: italic; color: #aaa; margin-top: 10px; text-align: center; }
         .highlight { color: var(--gold); font-weight: 600; }
     </style>
 </head>
 <body>
 <div class="overlay">
-    <header><div class="logo" onclick="location.reload()">Shatter Reserve</div></header>
+    <header><div class="logo" onclick="showView('home')">Shatter Reserve</div></header>
 
-    <!-- STEP 1: PACK SELECTION -->
-    <div id="step-1" class="container">
-        <h2>Choose Your Pack</h2>
-        <div class="card" onclick="selectPack('Solo Pack', 1, 130)"><h3>Solo Pack</h3><p>1 Bag</p><span class="price">₱130</span></div>
-        <div class="card" onclick="selectPack('Barkada Pack', 6, 650)"><h3>Barkada Pack</h3><p>5+1 FREE (6 bags)</p><span class="price">₱650</span></div>
-        <div class="card" onclick="selectPack('Family Pack', 12, 1300)"><h3>Family Pack</h3><p>10+2 FREE (12 bags)</p><span class="price">₱1,300</span></div>
-        <div class="card" onclick="selectPack('Custom Order', 0, 130)"><h3>Custom Order</h3><p>Any quantity</p><span class="price">₱130/bag</span></div>
+    <!-- HOME VIEW -->
+    <div id="home-view">
+        <section class="hero">
+            <h1>SHATTER RESERVE</h1>
+            <p>FINE MUSHROOM CRISPS</p>
+            <button class="cta-btn" style="width: auto; padding: 15px 50px;" onclick="showView('order')">ORDER NOW</button>
+        </section>
+
+        <section class="reseller-section">
+            <h2 style="margin-top:0;">Join Our Reseller Program</h2>
+            <p>Start your business with as low as ₱900 capital.</p>
+            <a href="https://m.me/61589629505231" target="_blank" class="cta-btn" style="text-decoration:none; display:inline-block; width:auto; padding: 15px 40px;">MESSAGE TO JOIN</a>
+        </section>
     </div>
 
-    <!-- STEP 2: FLAVOR SELECTION -->
-    <div id="step-2" class="container hidden">
-        <h2>Choose Your Flavors</h2>
-        <p id="pack-summary" style="text-align:center; font-weight:600;"></p>
-        <div id="flavor-container"></div>
-        <div class="summary-box">
-            <p>Selection: <span id="total-selected">0</span> / <span id="target-total"></span></p>
-        </div>
-        <button class="cta-btn" onclick="validateFlavors()">CONTINUE TO SHIPPING</button>
-    </div>
-
-    <!-- STEP 3: CUSTOMER DETAILS & SHIPPING -->
-    <div id="step-3" class="container hidden">
-        <h2>Delivery Details</h2>
-        <label>Full Name</label><input type="text" id="cust-name" placeholder="Juan Dela Cruz">
-        <label>Complete Address</label><textarea id="cust-address" rows="3" placeholder="House No, Street, Brgy, City"></textarea>
-        <label>Google Maps/Pin Location (Link or Description)</label><input type="text" id="cust-pin" placeholder="Paste link or describe landmarks">
-        <label>Phone Number</label><input type="text" id="cust-phone" placeholder="0917XXXXXXX">
+    <!-- ORDERING SYSTEM -->
+    <div id="order-view" class="hidden">
         
-        <label>Region</label>
-        <select id="region" onchange="calculateShipping()">
-            <option value="ncr">Metro Manila (NCR)</option>
-            <option value="luzon">Luzon (Provincial)</option>
-            <option value="visayas">Visayas</option>
-            <option value="mindanao">Mindanao</option>
-        </select>
-
-        <label>Shipping Method</label>
-        <select id="ship-method" onchange="calculateShipping()">
-            <!-- Options populated by JS based on region -->
-        </select>
-
-        <div id="shipping-note" class="note"></div>
-        
-        <div class="summary-box" style="margin-top:20px;">
-            <div class="summary-line"><span>Subtotal:</span><span id="sum-subtotal">₱0</span></div>
-            <div class="summary-line"><span>Shipping Fee:</span><span id="sum-ship">₱0</span></div>
-            <div class="summary-line" id="discount-row"><span>Promo Discount:</span><span id="sum-discount">-₱0</span></div>
-            <div class="summary-line total-line"><span>GRAND TOTAL:</span><span id="sum-total">₱0</span></div>
+        <!-- STEP 1 -->
+        <div id="step-1" class="container">
+            <h2>Step 1: Select Pack</h2>
+            <div class="card" onclick="selectPack('Solo Pack', 1, 130)"><h3>Solo Pack</h3><p>1 Bag</p><span class="price">₱130</span></div>
+            <div class="card" onclick="selectPack('Barkada Pack', 6, 650)"><h3>Barkada Pack</h3><p>5+1 FREE (6 bags)</p><span class="price">₱650</span></div>
+            <div class="card" onclick="selectPack('Family Pack', 12, 1300)"><h3>Family Pack</h3><p>10+2 FREE (12 bags)</p><span class="price">₱1,300</span></div>
+            <div class="card" onclick="selectPack('Custom Order', 0, 130)"><h3>Custom Order</h3><p>Any quantity</p><span class="price">₱130/bag</span></div>
         </div>
 
-        <p class="note">⚠️ Note: Customer pays the rider/courier directly for shipping unless stated as Free.</p>
-        <button class="cta-btn" onclick="finalizeOrder()">REVIEW & ORDER VIA MESSENGER</button>
+        <!-- STEP 2 -->
+        <div id="step-2" class="container hidden">
+            <h2>Step 2: Flavors</h2>
+            <p id="pack-summary" style="text-align:center; color:var(--gold);"></p>
+            <div id="flavor-container"></div>
+            <div style="text-align:center; margin-top:20px;">
+                <p>Total: <span id="total-selected" class="highlight">0</span> / <span id="target-total"></span></p>
+                <button class="cta-btn" onclick="validateFlavors()">CONTINUE TO SHIPPING</button>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="step-3" class="container hidden">
+            <h2>Step 3: Delivery Info</h2>
+            <label>Full Name</label><input type="text" id="cust-name">
+            <label>Complete Address</label><textarea id="cust-address" rows="2"></textarea>
+            <label>Pin Location / Landmark</label><input type="text" id="cust-pin">
+            <label>Phone Number</label><input type="text" id="cust-phone">
+            
+            <label>Region</label>
+            <select id="region" onchange="calculateShipping()">
+                <option value="ncr">Metro Manila (NCR)</option>
+                <option value="luzon">Luzon (Provincial)</option>
+                <option value="visayas">Visayas</option>
+                <option value="mindanao">Mindanao</option>
+            </select>
+
+            <label>Shipping Method</label>
+            <select id="ship-method" onchange="calculateShipping()"></select>
+
+            <div id="shipping-note" class="note"></div>
+            
+            <div class="summary-box">
+                <div class="summary-line"><span>Subtotal:</span><span id="sum-subtotal">₱0</span></div>
+                <div class="summary-line"><span>Shipping:</span><span id="sum-ship">₱0</span></div>
+                <div class="summary-line"><span>Discount:</span><span id="sum-discount">-₱0</span></div>
+                <div class="summary-line total-line"><span>TOTAL:</span><span id="sum-total">₱0</span></div>
+            </div>
+
+            <p class="note">⚠️ Note: Customer pays for courier delivery fees.</p>
+            <button class="cta-btn" onclick="finalizeOrder()">COMPLETE ORDER VIA MESSENGER</button>
+            <button class="cta-btn" style="background:#444; color:white; margin-top:10px;" onclick="showView('home')">Cancel</button>
+        </div>
     </div>
 </div>
 
 <script>
     let order = { pack: '', targetQty: 0, subtotal: 0, flavors: { Original: 0, Barbeque: 0, SourCream: 0, Cheese: 0 } };
 
+    function showView(view) {
+        document.getElementById('home-view').className = (view === 'home' ? '' : 'hidden');
+        document.getElementById('order-view').className = (view === 'order' ? '' : 'hidden');
+        if(view === 'order') showStep(1);
+    }
+
     function selectPack(name, qty, price) {
         order.pack = name; order.targetQty = qty; order.subtotal = price;
         document.getElementById('target-total').innerText = qty > 0 ? qty : 'Any';
+        document.getElementById('pack-summary').innerText = name;
         renderFlavors();
         showStep(2);
     }
@@ -129,7 +170,7 @@
 
     function validateFlavors() {
         let total = Object.values(order.flavors).reduce((a, b) => a + b, 0);
-        if (order.targetQty > 0 && total !== order.targetQty) return alert(`Select exactly ${order.targetQty} bags.`);
+        if (order.targetQty > 0 && total !== order.targetQty) return alert(`Please select exactly ${order.targetQty} bags.`);
         if (total === 0) return alert('Add at least 1 bag.');
         if (order.pack === 'Custom Order') order.subtotal = total * 130;
         showStep(3);
@@ -142,39 +183,32 @@
         const sub = order.subtotal;
         let shipFee = 0; let discount = 0; let note = '';
 
-        // Reset Method Options based on Region
         if (region === 'ncr') {
-            if (methodSelect.innerHTML.indexOf('Same-Day') === -1) {
-                methodSelect.innerHTML = `<option value="standard">J&T Standard (1-3 Days)</option><option value="express">Same-Day Express (Lalamove/Grab)</option>`;
-            }
+            methodSelect.innerHTML = `<option value="standard">J&T Standard (1-3 Days)</option><option value="express">Same-Day Express (Lalamove/Grab)</option>`;
         } else {
             methodSelect.innerHTML = `<option value="standard">J&T Provincial Standard</option>`;
         }
 
         const method = methodSelect.value;
         const totalBags = Object.values(order.flavors).reduce((a, b) => a + b, 0);
-        
-        // Volumetric Logic
-        let weightClass = 1; // Default Pouch (1kg)
-        if (totalBags >= 6 && totalBags < 12) weightClass = 2.5; // Medium Box
-        if (totalBags >= 12) weightClass = 4.5; // Large Box
+        let weightClass = totalBags < 6 ? 1 : (totalBags < 12 ? 2.5 : 4.5);
 
         if (region === 'ncr') {
             if (method === 'express') {
-                note = "Express Waived Free Shipping. <span class='highlight'>₱50 Subsidy</span> applied if subtotal ≥ ₱650. Rider fee paid by customer upon arrival.";
+                note = "Express Shipping: <span class='highlight'>₱50 Subsidy</span> applied for orders ≥ ₱650. Remaining fee paid to rider.";
                 if (sub >= 650) discount = 50;
-            } else { // Standard NCR
-                shipFee = (weightClass === 1) ? 115 : (weightClass === 2.5 ? 155 : 220);
-                if (sub >= 650) { shipFee = 0; note = "Free Shipping Promo Applied! (1-3 Days)"; }
+            } else {
+                shipFee = weightClass === 1 ? 115 : (weightClass === 2.5 ? 155 : 220);
+                if (sub >= 650) { shipFee = 0; note = "Free Shipping Promo Applied!"; }
             }
-        } else { // Provincial
+        } else {
             const rates = { luzon: [165, 190, 320], visayas: [180, 200, 370], mindanao: [195, 220, 370] };
             const idx = weightClass === 1 ? 0 : (weightClass === 2.5 ? 1 : 2);
             shipFee = rates[region][idx];
-
-            if (sub >= 3900) { shipFee = 0; note = "PROVINCIAL FREE SHIPPING APPLIED!"; }
-            else if (sub >= 1300) { discount = 150; note = "₱150 Provincial Shipping Discount Applied!"; }
-            else if (sub >= 650) { discount = 100; note = "₱100 Provincial Shipping Discount Applied!"; }
+            if (sub >= 3900) shipFee = 0;
+            else if (sub >= 1300) discount = 150;
+            else if (sub >= 650) discount = 100;
+            note = shipFee === 0 ? "FREE PROVINCIAL SHIPPING!" : "Provincial Shipping rates applied based on box volume.";
         }
 
         document.getElementById('sum-subtotal').innerText = `₱${sub}`;
@@ -185,32 +219,18 @@
     }
 
     function finalizeOrder() {
-        const fields = ['cust-name', 'cust-address', 'cust-pin', 'cust-phone'];
-        if (fields.some(f => !document.getElementById(f).value)) return alert('Please fill in all delivery details.');
-
+        if (!document.getElementById('cust-name').value || !document.getElementById('cust-phone').value) return alert('Fill in name and phone.');
         let flavorTxt = "";
         for (let f in order.flavors) if (order.flavors[f] > 0) flavorTxt += `- ${f}: ${order.flavors[f]}\n`;
-
-        let summary = `✨ NEW ORDER: ${order.pack} ✨\n\n`;
-        summary += `👤 CUSTOMER: ${document.getElementById('cust-name').value}\n`;
-        summary += `📞 PHONE: ${document.getElementById('cust-phone').value}\n`;
-        summary += `📍 ADDRESS: ${document.getElementById('cust-address').value}\n`;
-        summary += `📌 PIN: ${document.getElementById('cust-pin').value}\n\n`;
-        summary += `📦 ITEMS:\n${flavorTxt}\n`;
-        summary += `🚚 METHOD: ${document.getElementById('ship-method').options[document.getElementById('ship-method').selectedIndex].text}\n`;
-        summary += `💰 SUB-TOTAL: ₱${order.subtotal}\n`;
-        summary += `🚛 SHIP FEE: ${document.getElementById('sum-ship').innerText}\n`;
-        summary += `🎁 DISCOUNT: ${document.getElementById('sum-discount').innerText}\n`;
-        summary += `✅ GRAND TOTAL: ${document.getElementById('sum-total').innerText}\n\n`;
-        summary += `--- Customer acknowledges remaining rider/shipping fees are paid upon delivery. ---`;
-
+        
+        let summary = `✨ SHATTER RESERVE ORDER ✨\n\n👤 NAME: ${document.getElementById('cust-name').value}\n📞 PHONE: ${document.getElementById('cust-phone').value}\n📍 ADDR: ${document.getElementById('cust-address').value}\n📌 PIN: ${document.getElementById('cust-pin').value}\n\n📦 ITEMS:\n${flavorTxt}\n🚚 SHIP: ${document.getElementById('ship-method').options[document.getElementById('ship-method').selectedIndex].text}\n💰 TOTAL: ${document.getElementById('sum-total').innerText}`;
+        
         window.location.href = `https://m.me/61589629505231?text=${encodeURIComponent(summary)}`;
     }
 
     function showStep(s) {
         [1,2,3].forEach(n => document.getElementById(`step-${n}`).classList.add('hidden'));
         document.getElementById(`step-${s}`).classList.remove('hidden');
-        window.scrollTo(0,0);
     }
 </script>
 </body>
